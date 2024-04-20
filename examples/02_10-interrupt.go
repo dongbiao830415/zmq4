@@ -7,14 +7,15 @@
 package main
 
 import (
-	zmq "github.com/pebbe/zmq4"
-
+	"errors"
 	"fmt"
 	"log"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+
+	zmq "github.com/pebbe/zmq4"
 )
 
 func main() {
@@ -36,7 +37,7 @@ LOOP:
 		fmt.Println("Sent: HELLO")
 		reply, err := client.Recv(0)
 		if err != nil {
-			if zmq.AsErrno(err) == zmq.Errno(syscall.EINTR) {
+			if errors.Is(zmq.AsErrno(err), zmq.Errno(syscall.EINTR)) {
 				// signal was caught by 0MQ
 				log.Println("Client Recv:", err)
 				break
