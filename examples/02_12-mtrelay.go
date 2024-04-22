@@ -37,6 +37,7 @@ func step2() {
 	xmitter.Send("READY", 0)
 }
 
+// 这里的上下文件没有传到子协程里面去，统一使用的是默认的上下文件
 func main() {
 
 	//  Bind inproc socket before starting step2
