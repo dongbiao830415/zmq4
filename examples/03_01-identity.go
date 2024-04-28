@@ -37,6 +37,7 @@ func main() {
 	dump(sink)
 }
 
+// 主要是查看 REQ 与 ROUTER 通信的头
 func dump(soc *zmq.Socket) {
 	fmt.Println("----------------------------------------")
 	for {
